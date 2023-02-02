@@ -1,19 +1,21 @@
 
 import random
-def jogar():
-    print("Bem vindo ao jogo de forca!\n")
 
+def randomizar_palavra_secreta():
     arquivo = open("palavras.txt", "r")
     palavras = [ linha.strip() for linha in arquivo ]
+    arquivo.close()
+    return palavras[random.randrange(0, len(palavras))].strip().lower()
 
-    palavra_secretra = palavras[random.randrange(0, len(palavras))].strip().lower()
+def jogar():
+    print("Bem vindo ao jogo da forca!\n")
+
+    palavra_secretra = randomizar_palavra_secreta()
+    # letras_acertadas = ["_" for letra in palavra_secretra]
+    letras_acertadas = ["_"] * len(palavra_secretra)
     enforcou = False
     acertou = False
     erros = 0
-
-    letras_acertadas = ["_"] * len(palavra_secretra)
-    # letras_acertadas = ["_" for letra in palavra_secretra]
-
 
     while not enforcou and not acertou:
         chute = input("Tente advinhar a letra: ").strip().lower()
